@@ -6,7 +6,7 @@ OBJ = main.o
 	$(CC) -c -o $@ $<
 
 main: $(OBJ)
-	gcc -o $@ $^ $(LDFLAGS)
+	gcc -o $@ $^ $(LDFLAGS) -Wall
 
 clean:
 	rm -f *.o main

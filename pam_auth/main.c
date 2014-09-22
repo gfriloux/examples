@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <pwd.h>
 #include <errno.h>
+#include <stdlib.h>
+#include <string.h>
 #include <security/pam_appl.h>
-#include <security/pam_misc.h>
 
 char *_password = NULL;
 
