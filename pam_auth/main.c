@@ -74,5 +74,6 @@ int main(int argc, char **argv)
         }
      }
 
+   pam_end(pamh, 0);
    return 0;
 }
