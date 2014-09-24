@@ -16,8 +16,10 @@
 /**
  * Here we receive the response and print it
  */
-static Eina_Error
-_Demo_HowAreYou_Get_Ret(Azy_Client *client, Azy_Content *content, void *_response)
+Eina_Error
+_Demo_HowAreYou_Get_Ret(Azy_Client *client,
+                        Azy_Content *content,
+                        void *_response)
 {
    Demo_HowAreYouResponse *response = _response;
    //retrieve the question, last argument passed to Demo_HowAreYou_Get()
@@ -43,7 +45,10 @@ _Demo_HowAreYou_Get_Ret(Azy_Client *client, Azy_Content *content, void *_respons
 /**
  * Bad we have been disconnected
  */
-static Eina_Bool _disconnected(void *data, int type, void *data2)
+Eina_Bool
+_disconnected(void *data,
+              int type,
+              void *ev)
 {
    ecore_main_loop_quit();
    return ECORE_CALLBACK_RENEW;
@@ -52,9 +57,12 @@ static Eina_Bool _disconnected(void *data, int type, void *data2)
 /**
  * Yes we are connected ! Now we can send our question
  */
-static Eina_Bool
-connected(void *data, int type, Azy_Client *cli)
+Eina_Bool
+connected(void *data,
+          int type,
+          void *ev)
 {
+   Azy_Client *cli = ev;
    unsigned int ret;
    Azy_Content *content;
    Azy_Net *net;
@@ -92,7 +100,7 @@ connected(void *data, int type, Azy_Client *cli)
    return ECORE_CALLBACK_RENEW;
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
    Ecore_Event_Handler *handler;
    Azy_Client *cli;
@@ -101,7 +109,6 @@ int main(int argc, char *argv[])
    ecore_init();
    azy_init();
 
-   /* create object for performing client connections */
    cli = azy_client_new();
 
    if (!azy_client_host_set(cli, "127.0.0.1", 3412))
