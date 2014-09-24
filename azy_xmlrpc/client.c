@@ -11,6 +11,7 @@
              exit(1); \
           } \
      } while (0)
+/* "debug" */
 
 /**
  * Here we receive the response and print it
@@ -93,31 +94,33 @@ connected(void *data, int type, Azy_Client *cli)
 
 int main(int argc, char *argv[])
 {
-      Ecore_Event_Handler *handler;
-      Azy_Client *cli;
+   Ecore_Event_Handler *handler;
+   Azy_Client *cli;
 
-      azy_init();
+   eina_init();
+   ecore_init();
+   azy_init();
 
-      /* create object for performing client connections */
-      cli = azy_client_new();
+   /* create object for performing client connections */
+   cli = azy_client_new();
 
-      if (!azy_client_host_set(cli, "127.0.0.1", 3412))
-        return 1;
+   if (!azy_client_host_set(cli, "127.0.0.1", 3412))
+     return 1;
 
-      handler = ecore_event_handler_add(AZY_EVENT_CLIENT_CONNECTED, (Ecore_Event_Handler_Cb)connected, cli);
-      handler = ecore_event_handler_add(AZY_EVENT_CLIENT_DISCONNECTED, (Ecore_Event_Handler_Cb)_disconnected, cli);
+   handler = ecore_event_handler_add(AZY_EVENT_CLIENT_CONNECTED, (Ecore_Event_Handler_Cb)connected, cli);
+   handler = ecore_event_handler_add(AZY_EVENT_CLIENT_DISCONNECTED, (Ecore_Event_Handler_Cb)_disconnected, cli);
 
-      /* connect to the servlet on the server specified by uri */
-      if (!azy_client_connect(cli))
-        return 1;
+   /* connect to the servlet on the server specified by uri */
+   if (!azy_client_connect(cli))
+     return 1;
 
-      ecore_main_loop_begin();
+   ecore_main_loop_begin();
 
-      azy_client_free(cli);
-      azy_shutdown();
-      ecore_shutdown();
-      eina_shutdown();
+   azy_client_free(cli);
+   azy_shutdown();
+   ecore_shutdown();
+   eina_shutdown();
 
-      return 0;
+   return 0;
 }
 
