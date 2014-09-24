@@ -23,6 +23,7 @@ _transfer(void *data,
    printf("d[%p]\n", d);
    printf("%s\n", d);
 
+   free(d);
    return EINA_TRUE;
 }
 
@@ -44,14 +45,12 @@ _connected(void *data,
 {
    Azy_Client *cli = data;
    Azy_Net *net;
-   Azy_Content *content;
    Azy_Client_Call_Id id;
 
    printf("_connected()\n");
 
 
    net = azy_client_net_get(cli);
-   content = azy_content_new(NULL);
 
    azy_net_uri_set(net, "/");
    azy_net_transport_set(net, AZY_NET_TRANSPORT_JSON);
@@ -82,6 +81,8 @@ int main(int argc, char **argv)
      return 1;
 
    ecore_main_loop_begin();
+
+   azy_client_free(cli);
 
    azy_shutdown();
    ecore_shutdown();
