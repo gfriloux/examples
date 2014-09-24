@@ -58,9 +58,9 @@ _disconnected(void *data,
  * Yes we are connected ! Now we can send our question
  */
 Eina_Bool
-connected(void *data,
-          int type,
-          void *ev)
+_connected(void *data,
+           int type,
+           void *ev)
 {
    Azy_Client *cli = ev;
    unsigned int ret;
@@ -110,12 +110,13 @@ int main(int argc, char **argv)
    azy_init();
 
    cli = azy_client_new();
+   EINA_SAFETY_ON_NULL_RETURN_VAL(cli, 1);
 
    if (!azy_client_host_set(cli, "127.0.0.1", 3412))
      return 1;
 
-   handler = ecore_event_handler_add(AZY_EVENT_CLIENT_CONNECTED, (Ecore_Event_Handler_Cb)connected, cli);
-   handler = ecore_event_handler_add(AZY_EVENT_CLIENT_DISCONNECTED, (Ecore_Event_Handler_Cb)_disconnected, cli);
+   handler = ecore_event_handler_add(AZY_EVENT_CLIENT_CONNECTED, _connected, cli);
+   handler = ecore_event_handler_add(AZY_EVENT_CLIENT_DISCONNECTED, _disconnected, cli);
 
    /* connect to the servlet on the server specified by uri */
    if (!azy_client_connect(cli))
