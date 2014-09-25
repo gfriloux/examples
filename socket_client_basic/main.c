@@ -62,6 +62,10 @@ int main(int argc, char **argv)
      {
         printf("GOOD! Connection in progress\n");
      }
+   else
+     {
+        printf("r=%i errno=%i strerror=%s\n", r, errno, strerror(errno));
+     }
 
    r = select(sockfd + 1, &rfds, &wfds, &exfds, t);
    printf("select returned %i\n", r);
