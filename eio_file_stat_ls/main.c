@@ -4,8 +4,8 @@
 
 Eina_Bool
 _filter(void *data EINA_UNUSED,
-        Eio_File *handler EINA_UNUSED,
-        const Eina_File_Direct_Info *info EINA_UNUSED)
+        Eio_File *handler,
+        const Eina_File_Direct_Info *info)
 {
    Eina_Stat es;
    Eina_Bool r;
@@ -24,7 +24,7 @@ _filter(void *data EINA_UNUSED,
 
 void
 _main(void *data EINA_UNUSED,
-      Eio_File *handler EINA_UNUSED,
+      Eio_File *handler,
       const Eina_File_Direct_Info *info)
 {
    Eina_Stat es;
