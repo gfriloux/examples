@@ -12,7 +12,7 @@ _filter(void *data EINA_UNUSED,
    void *container;
 
    container = eio_file_container_get(handler);
-   printf("(thread) handler[%p] container[%p]\n", handler, container);
+   printf("(thread) handler[%p] info[%p] container[%p]\n", handler, info, container);
 
    r = eina_file_statat(container, (Eina_File_Direct_Info *)info, &es);
    EINA_SAFETY_ON_TRUE_RETURN(r);
@@ -28,14 +28,14 @@ _main(void *data EINA_UNUSED,
       const Eina_File_Direct_Info *info)
 {
    Eina_Stat es;
-   Eina_Bool r;
+   int r;
    void *container;
 
    container = eio_file_container_get(handler);
-   printf("(main) handler[%p] container[%p]\n", handler, container);
+   printf("(main) handler[%p] info[%p] container[%p]\n", handler, info, container);
 
    r = eina_file_statat(container, (Eina_File_Direct_Info *)info, &es);
-   EINA_SAFETY_ON_TRUE_RETURN(!r);
+   EINA_SAFETY_ON_TRUE_RETURN(r != 0);
 
    printf("(main) File %s : size=%llu mtime=%ld\n", info->path, es.size, es.mtime);
 }
