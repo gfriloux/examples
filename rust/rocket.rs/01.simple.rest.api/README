@@ -1,0 +1,3 @@
+Build : cargo build
+Run   : cargo run
+Test  : curl http://localhost:8000/hello/John/58

@@ -1,0 +1,10 @@
+[package]
+
+name = "simple_rest_api"
+version = "0.0.1"
+authors = [ "Guillaume Friloux <guillaume@friloux.me>" ]
+
+
+[dependencies]
+rocket = "0.2.4"
+rocket_codegen = "0.2.4"
