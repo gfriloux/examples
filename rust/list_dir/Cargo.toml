@@ -1,0 +1,9 @@
+[package]
+
+name = "list_dir"
+version = "0.0.1"
+authors = [ "Guillaume Friloux <guillaume@friloux.me>" ]
+
+[dependencies]
+glob = "0.2.11"
+regex = "0.2.1"
